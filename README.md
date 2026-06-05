@@ -117,6 +117,12 @@ sudo python3 dhcp_starvation.py
 ### 1. DHCP Snooping
 Limita cuántos paquetes DHCP puede enviar cada puerto por segundo. Si Kali envía más del límite configurado, el puerto se apaga automáticamente.
 
+```
+SW(config)# ip dhcp snooping
+SW(config)# ip dhcp snooping vlan 1
+SW(config-if)# ip dhcp snooping limit rate 10
+```
+
 ![DHCP Snooping resultado](https://i.postimg.cc/VvxsnCXz/STARVATION-M-1.png)
 
 ![DHCP Snooping evidencia 2](https://i.postimg.cc/R0SS79JJ/STARVATION-M-2.png)
@@ -124,6 +130,11 @@ Limita cuántos paquetes DHCP puede enviar cada puerto por segundo. Si Kali env�
 ### 2. Port Security
 Limita cuántas MACs puede aprender cada puerto. Como el ataque usa MACs diferentes en cada solicitud, el puerto se bloquea al superar el límite establecido.
 
+```
+SW(config-if)# switchport port-security
+SW(config-if)# switchport port-security maximum 2
+SW(config-if)# switchport port-security violation shutdown
+```
 ![Port Security resultado](https://i.postimg.cc/grbdnPPh/STARVATION-M-3.png)
 
 ---
