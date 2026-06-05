@@ -120,7 +120,9 @@ Limita cu√°ntos paquetes DHCP puede enviar cada puerto por segundo. Si Kali env√
 ```
 SW(config)# ip dhcp snooping
 SW(config)# ip dhcp snooping vlan 1
+SW(config)# interface range e0/1,e0/3
 SW(config-if)# ip dhcp snooping limit rate 10
+SW(config-if)# exit
 ```
 
 ![DHCP Snooping resultado](https://i.postimg.cc/VvxsnCXz/STARVATION-M-1.png)
