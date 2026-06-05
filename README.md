@@ -1,11 +1,5 @@
 # 🛡️ Ataque DHCP Starvation
 
-**Estudiante:** Elianny Bastardo Martich  
-**Matrícula:** 2025-0661  
-**Materia:** Seguridad de Redes  
-**Docente:** Jonathan Esteban Rondon Corniel  
-**Fecha:** 5 de junio 2026  
-
 📹 [Video demostración](https://youtu.be/jela0yqsyhc) | 📂 [Repositorio](https://github.com/info-elianny/Ataque-DHCP_STARVATION)
 
 ---
