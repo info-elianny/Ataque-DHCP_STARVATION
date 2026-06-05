@@ -80,20 +80,20 @@ sudo python3 dhcp_starvation.py
 ![IP Windows 7 antes del ataque](https://i.postimg.cc/8PYzgxY9/STARVATION-CAP-1.png)
 
 ### Windows 7 devolviendo la IP al servidor DHCP antes del ataque
-![Windows 7 devolviendo IP](images/image4.png)
+![Windows 7 devolviendo IP](https://i.postimg.cc/Qt7yVKN5/STARVATUON-CAP-2.png)
 
 ### Ejecutando el ataque
-![Ejecutando el ataque](images/image5.png)
+![Ejecutando el ataque](https://i.postimg.cc/9FbN4h2t/STARVATION-CAP-3.png)
 
-![Ejecutando el ataque 2](images/image6.png)
+![Ejecutando el ataque 2](https://i.postimg.cc/vmJPR876/STARVATION-CAP-4.png)
 
 ### Tabla DHCP antes del ataque
-![Tabla DHCP antes del ataque](images/image7.png)
+![Tabla DHCP antes del ataque](https://i.postimg.cc/QNkfP3Fs/STARVATION-5.png)
 
 ### Tabla DHCP llenándose durante el ataque
-![Tabla DHCP llenándose](images/image8.png)
+![Tabla DHCP llenándose](https://i.postimg.cc/9Qz1rwJz/STRAVATION-6.png)
 
-![Tabla DHCP llenándose 2](images/image9.png)
+![Tabla DHCP llenándose 2](https://i.postimg.cc/RF1Lj7Vg/STARVATION-6-6.png)
 
 ### Windows 7 solicitando IP después del ataque
 ![Windows 7 después del ataque](images/image10.png)
@@ -117,14 +117,14 @@ sudo python3 dhcp_starvation.py
 ### 1. DHCP Snooping
 Limita cuántos paquetes DHCP puede enviar cada puerto por segundo. Si Kali envía más del límite configurado, el puerto se apaga automáticamente.
 
-![DHCP Snooping resultado](images/image11.png)
+![DHCP Snooping resultado](https://i.postimg.cc/VvxsnCXz/STARVATION-M-1.png)
 
-![DHCP Snooping evidencia 2](images/image12.png)
+![DHCP Snooping evidencia 2](https://i.postimg.cc/R0SS79JJ/STARVATION-M-2.png)
 
 ### 2. Port Security
 Limita cuántas MACs puede aprender cada puerto. Como el ataque usa MACs diferentes en cada solicitud, el puerto se bloquea al superar el límite establecido.
 
-![Port Security resultado](images/image13.png)
+![Port Security resultado](https://i.postimg.cc/grbdnPPh/STARVATION-M-3.png)
 
 ---
 
