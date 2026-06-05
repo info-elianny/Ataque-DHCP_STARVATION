@@ -1,4 +1,3 @@
-# Ataque-DHCP_STARVATION
 # 🛡️ Ataque DHCP Starvation
 
 **Estudiante:** Elianny Bastardo Martich  
