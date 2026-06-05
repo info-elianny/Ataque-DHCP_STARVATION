@@ -96,7 +96,7 @@ sudo python3 dhcp_starvation.py
 ![Tabla DHCP llenándose 2](https://i.postimg.cc/RF1Lj7Vg/STARVATION-6-6.png)
 
 ### Windows 7 solicitando IP después del ataque
-![Windows 7 después del ataque](images/image10.png)
+![Windows 7 después del ataque](https://i.postimg.cc/9FBFrrrM/windows-stavation.png)
 
 ---
 
