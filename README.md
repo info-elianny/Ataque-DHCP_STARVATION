@@ -8,6 +8,9 @@
 
 Analizar el funcionamiento de un ataque DHCP Starvation mediante el envío masivo de solicitudes DHCP Discover, con el propósito de observar cómo se puede agotar el conjunto de direcciones IP disponibles en un servidor DHCP y afectar la asignación de direcciones a nuevos dispositivos de la red.
 
+### Topología de Red
+![Topología de Red](https://i.postimg.cc/26Y5Xvtw/STARVATION-1.png)
+
 ---
 
 ## 🎯 Objetivo del Script
@@ -73,11 +76,8 @@ sudo python3 dhcp_starvation.py
 
 ## 📸 Capturas de Pantalla
 
-### Topología de Red
-![Topología de Red](images/image2.png)
-
 ### IP del Windows 7 por DHCP antes del ataque
-![IP Windows 7 antes del ataque](images/image3.png)
+![IP Windows 7 antes del ataque](https://i.postimg.cc/8PYzgxY9/STARVATION-CAP-1.png)
 
 ### Windows 7 devolviendo la IP al servidor DHCP antes del ataque
 ![Windows 7 devolviendo IP](images/image4.png)
@@ -85,30 +85,18 @@ sudo python3 dhcp_starvation.py
 ### Ejecutando el ataque
 ![Ejecutando el ataque](images/image5.png)
 
+![Ejecutando el ataque 2](images/image6.png)
+
 ### Tabla DHCP antes del ataque
-![Tabla DHCP antes del ataque](images/image6.png)
+![Tabla DHCP antes del ataque](images/image7.png)
 
 ### Tabla DHCP llenándose durante el ataque
-![Tabla DHCP llenándose](images/image7.png)
+![Tabla DHCP llenándose](images/image8.png)
 
-### Tabla DHCP saturada
-![Tabla DHCP saturada](images/image8.png)
-
-### Evidencia adicional del ataque
-![Evidencia adicional](images/image9.png)
+![Tabla DHCP llenándose 2](images/image9.png)
 
 ### Windows 7 solicitando IP después del ataque
 ![Windows 7 después del ataque](images/image10.png)
-
-### Resultado en el cliente
-![Resultado en el cliente](images/image11.png)
-
-### Estado de la red post-ataque
-![Estado post-ataque](images/image12.png)
-
-![Estado post-ataque 2](images/image13.png)
-
-![Estado post-ataque 3](images/image14.png)
 
 ---
 
@@ -129,10 +117,16 @@ sudo python3 dhcp_starvation.py
 ### 1. DHCP Snooping
 Limita cuántos paquetes DHCP puede enviar cada puerto por segundo. Si Kali envía más del límite configurado, el puerto se apaga automáticamente.
 
+![DHCP Snooping resultado](images/image11.png)
+
+![DHCP Snooping evidencia 2](images/image12.png)
+
 ### 2. Port Security
 Limita cuántas MACs puede aprender cada puerto. Como el ataque usa MACs diferentes en cada solicitud, el puerto se bloquea al superar el límite establecido.
 
+![Port Security resultado](images/image13.png)
+
 ---
 
-> ⚠️ **Este script es únicamente con fines educativos y de investigación en entornos controlados.**
-> ⚠️ **BY Elianny**
+> ⚠️ **Este script es únicamente con fines educativos y de investigación en entornos controlados.**  
+> ⚠️ **BY: Elianny**
