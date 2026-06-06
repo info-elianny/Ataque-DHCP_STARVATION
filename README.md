@@ -1,6 +1,6 @@
 # 🛡️ Ataque DHCP Starvation
 
-📹 [Video demostración](https://youtu.be/jela0yqsyhc) | 📂 [Repositorio](https://github.com/info-elianny/Ataque-DHCP_STARVATION)
+📹 [Video demostración](https://youtu.be/jela0yqsyhc) 
 
 ---
 
